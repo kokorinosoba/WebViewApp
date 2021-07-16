@@ -1,6 +1,7 @@
 ﻿using Foundation;
 using System;
 using UIKit;
+using WebKit;
 
 namespace WebViewApp
 {
@@ -13,7 +14,17 @@ namespace WebViewApp
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            // Perform any additional setup after loading the view, typically from a nib.
+            WKWebView webView = new WKWebView(View.Frame, new WKWebViewConfiguration());
+            View.AddSubview(webView);
+
+            var url = new NSUrl("https://www.google.co.jp/");
+            webView.LoadRequest(new NSUrlRequest(url));
+        }
+
+        public override void ViewDidLayoutSubviews()
+        {
+            base.ViewDidLayoutSubviews();
+            // WebView.Frame = View.Bounds;
         }
 
         public override void DidReceiveMemoryWarning()
