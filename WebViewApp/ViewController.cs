@@ -1,4 +1,5 @@
-﻿using Foundation;
+﻿using CoreText;
+using Foundation;
 using System;
 using UIKit;
 using WebKit;
@@ -20,6 +21,7 @@ namespace WebViewApp
             TextFieldUrl.Layer.BorderColor = UIColor.Gray.CGColor;
             TextFieldUrl.Layer.BorderWidth = 1;
             TextFieldUrl.Layer.CornerRadius = 5;
+            TextFieldUrl.AttributedPlaceholder = new NSAttributedString(TextFieldUrl.Placeholder, null, UIColor.Gray);
 
             var url = new NSUrl("https://www.photoback.jp/");
             WebView.LoadRequest(new NSUrlRequest(url));
