@@ -17,8 +17,46 @@ namespace WebViewApp
             // WKWebView webView = new WKWebView(View.Frame, new WKWebViewConfiguration());
             // View.AddSubview(webView);
 
-            var url = new NSUrl("https://www.google.co.jp/");
+            TextFieldUrl.Layer.BorderColor = UIColor.Gray.CGColor;
+            TextFieldUrl.Layer.BorderWidth = 1;
+            TextFieldUrl.Layer.CornerRadius = 5;
+
+            var url = new NSUrl("https://www.photoback.jp/");
             WebView.LoadRequest(new NSUrlRequest(url));
+
+            ButtonBack.TouchUpInside += delegate
+            {
+                WebView.GoBack();
+            };
+
+            ButtonForward.TouchUpInside += delegate
+            {
+                WebView.GoForward();
+            };
+
+            ButtonRefresh.TouchUpInside += delegate
+            {
+                WebView.Reload();
+            };
+
+            ButtonStop.TouchUpInside += delegate
+            {
+                WebView.StopLoading();
+            };
+
+            ButtonLoad.TouchUpInside += delegate
+            {
+                if (Uri.IsWellFormedUriString(TextFieldUrl.Text, UriKind.Absolute))
+                {
+                    WebView.LoadRequest(new NSUrlRequest(new NSUrl(TextFieldUrl.Text)));
+                }
+                else
+                {
+                    var alert = UIAlertController.Create("注意", "URLが間違っています。正しい形式のURLを入力して下さい。", UIAlertControllerStyle.Alert);
+                    alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                    PresentViewController(alert, animated: true, completionHandler: null);
+                }
+            };
         }
 
         public override void ViewDidLayoutSubviews()
