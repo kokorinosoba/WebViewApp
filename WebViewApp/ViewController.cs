@@ -14,11 +14,11 @@ namespace WebViewApp
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            WKWebView webView = new WKWebView(View.Frame, new WKWebViewConfiguration());
-            View.AddSubview(webView);
+            // WKWebView webView = new WKWebView(View.Frame, new WKWebViewConfiguration());
+            // View.AddSubview(webView);
 
             var url = new NSUrl("https://www.google.co.jp/");
-            webView.LoadRequest(new NSUrlRequest(url));
+            WebView.LoadRequest(new NSUrlRequest(url));
         }
 
         public override void ViewDidLayoutSubviews()
