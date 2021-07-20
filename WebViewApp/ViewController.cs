@@ -1,12 +1,13 @@
 ﻿using CoreText;
 using Foundation;
 using System;
+using System.Diagnostics;
 using UIKit;
 using WebKit;
 
 namespace WebViewApp
 {
-    public partial class ViewController : UIViewController
+    public partial class ViewController : UIViewController, IWKNavigationDelegate
     {
         public ViewController(IntPtr handle) : base(handle)
         {
@@ -14,6 +15,7 @@ namespace WebViewApp
 
         public override void ViewDidLoad()
         {
+            System.Diagnostics.Debug.WriteLine("Application Started");
             base.ViewDidLoad();
             // WKWebView webView = new WKWebView(View.Frame, new WKWebViewConfiguration());
             // View.AddSubview(webView);
@@ -27,6 +29,7 @@ namespace WebViewApp
             TextFieldUrl.LeftView = new UIView(frame: new CoreGraphics.CGRect(0, 0, 10, TextFieldUrl.Frame.Size.Height));
             TextFieldUrl.LeftViewMode = UITextFieldViewMode.Always;
 
+            WebView.NavigationDelegate = this;
 
             var url = new NSUrl("https://www.photoback.jp/");
             WebView.LoadRequest(new NSUrlRequest(url));
@@ -64,6 +67,65 @@ namespace WebViewApp
                     PresentViewController(alert, animated: true, completionHandler: null);
                 }
             };
+
+            /*
+            // ロード開始時
+            WebView.LoadStarted += (sender, args) => {
+                // ネットワークアクティブインジケータ設定
+                UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
+                // 実際のリクエスト行（リダイレクト時などは、ロードがリクエスト指定したものとは限らないため）
+                var url = webView.Request.Url.AbsoluteString;
+                // 入力行にコピー
+                textBoxUrl.Text = url;
+                // ステータス表示
+                labelStatus.Text = String.Format("LoadStarted {0}", url);
+                InitButton(true); // ボタン状態の初期化
+            };
+
+            // ロード完了時
+            WebView.LoadFinished += (sender, args) => {
+                // ネットワークアクティブインジケータ設定
+                UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
+                // ステータス表示
+                // labelStatus.Text = "LoadFinished";
+                InitButton(false);//ボタン状態の初期化
+            };
+
+            // エラー発生時
+            WebView.LoadError += (sender, e) => {
+                // ネットワークアクティブインジケータ設定
+                UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
+                // ステータス表示
+                // labelStatus.Text = "LoadError";
+                // エラーの内容をダイアログ表示する
+                (new UIAlertView("ERROR", e.Error.LocalizedDescription, null, "OK", null)).Show();
+                InitButton(true); // ボタン状態の初期化
+            };
+
+            // ボタン状態の初期化
+            InitButton(false);
+            */
+        }
+
+        // ボタン状態の初期化
+        private void InitButton(bool isLoading)
+        {
+            ButtonBack.Enabled = WebView.CanGoBack; // 戻るボタンの有効・無効
+            ButtonForward.Enabled = WebView.CanGoForward; // 進むボタンの有効・無効
+            ButtonStop.Enabled = isLoading; // ロード中に有効
+            ButtonRefresh.Enabled = !isLoading; // ロード中は無効
+        }
+
+        [Export("webView:didCommitNavigation:")]
+        public virtual void DidCommitNavigation(WKWebView webView, WKNavigation navigation)
+        {
+            System.Diagnostics.Debug.WriteLine("webView:didCommitNavigation:");
+        }
+
+        [Export("webView:didFinishNavigation:")]
+        public virtual void DidFinishNavigation(WKWebView webView, WKNavigation navigation)
+        {
+            System.Diagnostics.Debug.WriteLine("webView:didFinishNavigation:");
         }
 
         public override void ViewDidLayoutSubviews()
