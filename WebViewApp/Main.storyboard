@@ -18,63 +18,69 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ここにURLを入力して下さい" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="57v-A9-qvQ">
-                                <rect key="frame" x="30" y="54" width="354" height="34"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="SLv-tF-uEZ">
                                 <rect key="frame" x="30" y="811" width="354" height="41"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W3b-ph-Kxo">
-                                        <rect key="frame" x="0.0" y="0.0" width="57" height="41"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="76" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <state key="normal" title="&lt;&lt;"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vdm-04-rfx">
-                                        <rect key="frame" x="74" y="0.0" width="57.5" height="41"/>
+                                        <rect key="frame" x="93" y="0.0" width="75.5" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <state key="normal" title="&gt;&gt;"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CGZ-Ao-M1g">
-                                        <rect key="frame" x="148.5" y="0.0" width="57" height="41"/>
+                                        <rect key="frame" x="185.5" y="0.0" width="76" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <state key="normal" title="↻"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xMz-k4-oxz">
-                                        <rect key="frame" x="222.5" y="0.0" width="57.5" height="41"/>
+                                        <rect key="frame" x="278.5" y="0.0" width="75.5" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <state key="normal" title="□"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="El0-8O-iSM">
-                                        <rect key="frame" x="297" y="0.0" width="57" height="41"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <state key="normal" title="▷"/>
                                     </button>
                                 </subviews>
                             </stackView>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xJ0-qH-hqF">
-                                <rect key="frame" x="0.0" y="98" width="414" height="703"/>
+                                <rect key="frame" x="0.0" y="105" width="414" height="696"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ここにURLを入力して下さい" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="57v-A9-qvQ">
+                                <rect key="frame" x="10" y="54" width="354" height="41"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="El0-8O-iSM">
+                                <rect key="frame" x="374" y="54" width="30" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="7Rx-HJ-XrN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="▷"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="El0-8O-iSM" secondAttribute="trailing" constant="10" id="9nO-BG-K4q"/>
                             <constraint firstItem="57v-A9-qvQ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="BMd-No-g4q"/>
                             <constraint firstAttribute="trailingMargin" secondItem="SLv-tF-uEZ" secondAttribute="trailing" constant="10" id="JbE-0b-pZO"/>
                             <constraint firstItem="xJ0-qH-hqF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Jrr-6b-c4h"/>
                             <constraint firstItem="SLv-tF-uEZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="NGD-I0-sVd"/>
                             <constraint firstItem="xJ0-qH-hqF" firstAttribute="top" secondItem="57v-A9-qvQ" secondAttribute="bottom" constant="10" id="NKh-ze-pDq"/>
-                            <constraint firstItem="57v-A9-qvQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="ihx-UO-1P5"/>
+                            <constraint firstItem="xJ0-qH-hqF" firstAttribute="top" secondItem="El0-8O-iSM" secondAttribute="bottom" constant="10" id="PWK-5a-ygU"/>
+                            <constraint firstItem="57v-A9-qvQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="UL2-cF-oac"/>
                             <constraint firstItem="SLv-tF-uEZ" firstAttribute="top" secondItem="xJ0-qH-hqF" secondAttribute="bottom" constant="10" id="jbd-Gy-wE4"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="57v-A9-qvQ" secondAttribute="trailing" constant="10" id="oaI-Vz-MJo"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="SLv-tF-uEZ" secondAttribute="bottom" constant="10" id="tC1-Xt-yHs"/>
+                            <constraint firstItem="El0-8O-iSM" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="wGf-JR-cWt"/>
                             <constraint firstAttribute="trailing" secondItem="xJ0-qH-hqF" secondAttribute="trailing" id="yKE-ly-v82"/>
+                            <constraint firstItem="El0-8O-iSM" firstAttribute="leading" secondItem="57v-A9-qvQ" secondAttribute="trailing" constant="10" id="zaZ-tY-3P4"/>
                         </constraints>
                     </view>
                     <connections>
