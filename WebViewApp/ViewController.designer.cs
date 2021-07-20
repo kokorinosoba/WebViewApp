@@ -28,6 +28,9 @@ namespace WebViewApp
 		UIKit.UIButton ButtonStop { get; set; }
 
 		[Outlet]
+		UIKit.UIButton ButtonTimer { get; set; }
+
+		[Outlet]
 		UIKit.UITextField TextFieldUrl { get; set; }
 
 		[Outlet]
@@ -35,14 +38,9 @@ namespace WebViewApp
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (TextFieldUrl != null) {
-				TextFieldUrl.Dispose ();
-				TextFieldUrl = null;
-			}
-
-			if (WebView != null) {
-				WebView.Dispose ();
-				WebView = null;
+			if (ButtonBack != null) {
+				ButtonBack.Dispose ();
+				ButtonBack = null;
 			}
 
 			if (ButtonForward != null) {
@@ -50,9 +48,14 @@ namespace WebViewApp
 				ButtonForward = null;
 			}
 
-			if (ButtonBack != null) {
-				ButtonBack.Dispose ();
-				ButtonBack = null;
+			if (ButtonLoad != null) {
+				ButtonLoad.Dispose ();
+				ButtonLoad = null;
+			}
+
+			if (ButtonTimer != null) {
+				ButtonTimer.Dispose ();
+				ButtonTimer = null;
 			}
 
 			if (ButtonRefresh != null) {
@@ -65,9 +68,14 @@ namespace WebViewApp
 				ButtonStop = null;
 			}
 
-			if (ButtonLoad != null) {
-				ButtonLoad.Dispose ();
-				ButtonLoad = null;
+			if (TextFieldUrl != null) {
+				TextFieldUrl.Dispose ();
+				TextFieldUrl = null;
+			}
+
+			if (WebView != null) {
+				WebView.Dispose ();
+				WebView = null;
 			}
 		}
 	}

@@ -23,22 +23,29 @@
                                 <rect key="frame" x="30" y="811" width="354" height="41"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W3b-ph-Kxo">
-                                        <rect key="frame" x="0.0" y="0.0" width="76" height="41"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="57" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <state key="normal" title="&lt;&lt;"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vdm-04-rfx">
-                                        <rect key="frame" x="93" y="0.0" width="75.5" height="41"/>
+                                        <rect key="frame" x="74" y="0.0" width="57.5" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <state key="normal" title="&gt;&gt;"/>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NR5-mj-t98">
+                                        <rect key="frame" x="148.5" y="0.0" width="57" height="41"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <state key="normal" title="●">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CGZ-Ao-M1g">
-                                        <rect key="frame" x="185.5" y="0.0" width="76" height="41"/>
+                                        <rect key="frame" x="222.5" y="0.0" width="57.5" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <state key="normal" title="↻"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xMz-k4-oxz">
-                                        <rect key="frame" x="278.5" y="0.0" width="75.5" height="41"/>
+                                        <rect key="frame" x="297" y="0.0" width="57" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <state key="normal" title="□"/>
                                     </button>
@@ -93,6 +100,7 @@
                         <outlet property="ButtonLoad" destination="El0-8O-iSM" id="Zwn-WC-FYO"/>
                         <outlet property="ButtonRefresh" destination="CGZ-Ao-M1g" id="Nfl-1g-tuX"/>
                         <outlet property="ButtonStop" destination="xMz-k4-oxz" id="gxQ-2t-bqI"/>
+                        <outlet property="ButtonTimer" destination="NR5-mj-t98" id="c51-Vl-uZk"/>
                         <outlet property="TextFieldUrl" destination="57v-A9-qvQ" id="JqL-dJ-Nbh"/>
                         <outlet property="WebView" destination="xJ0-qH-hqF" id="spw-Xe-9hA"/>
                     </connections>
