@@ -18,10 +18,15 @@ namespace WebViewApp
             // WKWebView webView = new WKWebView(View.Frame, new WKWebViewConfiguration());
             // View.AddSubview(webView);
 
-            TextFieldUrl.Layer.BorderColor = UIColor.Gray.CGColor;
+            TextFieldUrl.Layer.BorderColor = UIColor.LightGray.CGColor;
             TextFieldUrl.Layer.BorderWidth = 1;
-            TextFieldUrl.Layer.CornerRadius = 5;
+            TextFieldUrl.Layer.CornerRadius = 20;
+            TextFieldUrl.Layer.BackgroundColor = UIColor.LightGray.CGColor;
+            TextFieldUrl.ClipsToBounds = true;
             TextFieldUrl.AttributedPlaceholder = new NSAttributedString(TextFieldUrl.Placeholder, null, UIColor.Gray);
+            TextFieldUrl.LeftView = new UIView(frame: new CoreGraphics.CGRect(0, 0, 10, TextFieldUrl.Frame.Size.Height));
+            TextFieldUrl.LeftViewMode = UITextFieldViewMode.Always;
+
 
             var url = new NSUrl("https://www.photoback.jp/");
             WebView.LoadRequest(new NSUrlRequest(url));
