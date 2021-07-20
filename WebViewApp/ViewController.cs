@@ -10,10 +10,14 @@ namespace WebViewApp
     public partial class ViewController : UIViewController, IWKNavigationDelegate
     {
         Stopwatch Stopwatch;
+        bool IsTimerActive;
+        bool IsLoading;
 
         public ViewController(IntPtr handle) : base(handle)
         {
             Stopwatch = new Stopwatch();
+            IsTimerActive = true;
+            IsLoading = false;
         }
 
         public override void ViewDidLoad()
@@ -57,6 +61,11 @@ namespace WebViewApp
                 WebView.StopLoading();
             };
 
+            ButtonTimer.TouchUpInside += delegate
+            {
+                ButtonTimer_TouchUpInside();
+            };
+
             ButtonLoad.TouchUpInside += delegate
             {
                 if (Uri.IsWellFormedUriString(TextFieldUrl.Text, UriKind.Absolute))
@@ -72,21 +81,37 @@ namespace WebViewApp
             };
 
             // ボタン状態の初期化
-            InitButton(false);
+            IsLoading = false;
+            InitButton();
         }
 
         // ボタン状態の初期化
-        private void InitButton(bool isLoading)
+        private void InitButton()
         {
             ButtonBack.Enabled = WebView.CanGoBack; // 戻るボタンの有効・無効
             ButtonForward.Enabled = WebView.CanGoForward; // 進むボタンの有効・無効
-            ButtonStop.Enabled = isLoading; // ロード中に有効
-            ButtonRefresh.Enabled = !isLoading; // ロード中は無効
+            ButtonStop.Enabled = IsLoading; // ロード中に有効
+            ButtonRefresh.Enabled = !IsLoading; // ロード中は無効
+        }
+
+        private void ButtonTimer_TouchUpInside()
+        {
+            if (IsLoading)
+            {
+                var alert = UIAlertController.Create("注意", "Webサイトの読み込み中は計測ボタンを操作できません。", UIAlertControllerStyle.Alert);
+                alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                PresentViewController(alert, animated: true, completionHandler: null);
+                return;
+            }
+            IsTimerActive = !IsTimerActive;
+            ButtonTimer.SetTitleColor(IsTimerActive ? UIColor.Red : UIColor.White, UIControlState.Normal);
         }
 
         [Export("webView:didCommitNavigation:")]
         public virtual void DidCommitNavigation(WKWebView webView, WKNavigation navigation)
         {
+            Debug.WriteLine("webView:didCommitNavigation:");
+
             // ネットワークアクティブインジケータ設定
             UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
 
@@ -97,38 +122,48 @@ namespace WebViewApp
 
             // ステータス表示
             // labelStatus.Text = String.Format("LoadStarted {0}", url);
-            InitButton(true); // ボタン状態の初期化
+            IsLoading = true;
+            InitButton(); // ボタン状態の初期化
 
-            Debug.WriteLine("webView:didCommitNavigation:");
-            Stopwatch.Restart();
+            if (IsTimerActive)
+            {
+                Stopwatch.Restart();
+            }
         }
 
         [Export("webView:didFinishNavigation:")]
         public virtual void DidFinishNavigation(WKWebView webView, WKNavigation navigation)
         {
+            Debug.WriteLine("webView:didFinishNavigation:");
+
             // ネットワークアクティブインジケータ設定
             UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
 
-            Debug.WriteLine("webView:didFinishNavigation:");
-            Stopwatch.Stop();
+            if (IsTimerActive)
+            {
+                Stopwatch.Stop();
 
-            // 読み込みにかかった時間を表示
-            TimeSpan timeSpan = Stopwatch.Elapsed;
-            string loadTimeDescription = $"{timeSpan.Hours} 時間 {timeSpan.Minutes} 分 {timeSpan.Seconds} 秒 {timeSpan.Milliseconds} ミリ秒";
-            Debug.WriteLine(loadTimeDescription);
+                // 読み込みにかかった時間を表示
+                TimeSpan timeSpan = Stopwatch.Elapsed;
+                string loadTimeDescription = $"{timeSpan.Hours} 時間 {timeSpan.Minutes} 分 {timeSpan.Seconds} 秒 {timeSpan.Milliseconds} ミリ秒";
+                Debug.WriteLine(loadTimeDescription);
 
-            var alert = UIAlertController.Create("読み込み時間", $"読み込みにかかった時間は\n{loadTimeDescription}\nでした。", UIAlertControllerStyle.Alert);
-            alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
-            PresentViewController(alert, animated: true, completionHandler: null);
+                var alert = UIAlertController.Create("読み込み時間", $"読み込みにかかった時間は\n{loadTimeDescription}\nでした。", UIAlertControllerStyle.Alert);
+                alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                PresentViewController(alert, animated: true, completionHandler: null);
+            }
 
             // ステータス表示
             // labelStatus.Text = "LoadFinished";
-            InitButton(false);//ボタン状態の初期化
+            IsLoading = false;
+            InitButton();//ボタン状態の初期化
         }
 
         [Export("webView:didFailNavigation:withError:")]
         public virtual void DidFailNavigation(WKWebView webView, WKNavigation navigation, NSError error)
         {
+            Debug.WriteLine("webView:didFailNavigation:withError:");
+
             // ネットワークアクティブインジケータ設定
             UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
 
@@ -137,9 +172,15 @@ namespace WebViewApp
             alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
             PresentViewController(alert, animated: true, completionHandler: null);
 
+            if (IsTimerActive)
+            {
+                Stopwatch.Stop();
+            }
+
             // ステータス表示
             // labelStatus.Text = "LoadError";
-            InitButton(false); // ボタン状態の初期化
+            IsLoading = false;
+            InitButton(); // ボタン状態の初期化
         }
 
         public override void ViewDidLayoutSubviews()
