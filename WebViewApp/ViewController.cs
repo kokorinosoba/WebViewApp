@@ -168,7 +168,7 @@ namespace WebViewApp
             UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
 
             // エラーの内容をダイアログ表示する
-            var alert = UIAlertController.Create("エラー", error.LocalizedDescription, UIAlertControllerStyle.Alert);
+            var alert = UIAlertController.Create("エラー", $"読み込みを停止したかページの読み込み中にエラーが発生しました。\n{error.LocalizedDescription}", UIAlertControllerStyle.Alert);
             alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
             PresentViewController(alert, animated: true, completionHandler: null);
 
